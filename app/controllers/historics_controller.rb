@@ -13,7 +13,7 @@ class HistoricsController < ApplicationController
     if @historic.save
       render json: @historic, status: :created
     else
-      render json: @historicr.errors, status: :unprocessable_entity
+      render json: @historic.errors, status: :unprocessable_entity
     end
   end
 
