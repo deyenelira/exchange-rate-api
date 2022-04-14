@@ -12,7 +12,12 @@ class HistoricsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create historic" do
     assert_difference('Historic.count') do
-      post historics_url, params: { historic: { base: @historic.base, date: @historic.date, historical: @historic.historical, rates: @historic.rates, success: @historic.success, timestamp: @historic.timestamp } }
+      post historics_url, params: { base: @historic.base,
+                                    date: @historic.date,
+                                    historical: @historic.historical,
+                                    rates: @historic.rates,
+                                    success: @historic.success,
+                                    timestamp: @historic.timestamp }
     end
 
     assert_response :created
