@@ -16,8 +16,8 @@ class HistoricalRates
 
   def query
     result = []
-    dates = (@start_date.to_date..@end_date.to_date).to_a
-
+    dates = date_range(@start_date.to_date, @end_date.to_date, 1.day)
+    
     dates.each do |date|
       url = URI("https://fixer-fixer-currency-v1.p.rapidapi.com/#{date.to_date}?base=BRL&symbols=USD")
 
@@ -30,11 +30,24 @@ class HistoricalRates
       request['X-RapidAPI-Key'] = '8829aa2d6amsh168397e64463c2fp1cdb0djsne545e1442df1'
 
       response = http.request(request)
+      p JSON.parse(response.read_body)
       CreateHistoric.new(JSON.parse(response.read_body)).call
 
       result << JSON.parse(response.read_body)
     end
 
+    result
+  end
+
+  def date_range(start, stop, step)
+    start = start.to_date 
+    stop = stop.to_date
+    dates = [start]
+    result = [start.to_s]
+    while dates.last < (stop - step)
+      dates << (dates.last + step)
+      result << (dates.last + step).to_s
+    end 
     result
   end
 end
