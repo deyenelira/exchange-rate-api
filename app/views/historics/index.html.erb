@@ -1,0 +1,29 @@
+<%= stylesheet_link_tag :historics %>
+<div class="background">
+  <div class="title">
+    <h1>Exchange rate from Real to US-Dollar</h1>
+  </div>
+  <div class="container"> 
+    <td>
+      <div class="latest_exchange">
+        <%= link_to("Click to check the real-time exchange rate", { controller: "exchange_rate", action: "latest_rate" }, :class => "link") %>
+      </div>
+      <h3> Or select a date range to check the exchange rate history </h3> 
+      <%= form_tag({controller: "exchange_rate", action: "historical_rates"}, method: "get") do %>
+        <%= label_tag(:start_date, "First date:") %>
+        <%= date_field_tag(:start_date) %>
+        <%= label_tag(:end_date, "Last date:") %>
+        <%= date_field_tag(:end_date) %>
+        <%= submit_tag("Ok", :class => "button") %>
+      <% end %>
+    </td>
+    <h4> History of all exchange rates consulted </h4> 
+      <% @historics.each do |historic| %>
+        <a href="/historics/<%= historic.id %>", class="item">
+            Collected on: <%= historic.date %>,
+            exchange rate: 1 BRL = <%= historic.rates["USD"]%> USD
+          <br>
+        </a>
+      <% end %>
+  </div>
+</div>

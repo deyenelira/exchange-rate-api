@@ -1,0 +1,68 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Signika&display=swap');
+
+body {
+  background-color: pink;
+  font-family: 'Signika', sans-serif;
+}
+
+.title {
+  background-color: #d87093;
+  border-radius:50px;
+  text-align: center;
+}
+
+.button {
+  background-color: #d87093; /* Green */
+  border: none;
+  color: white;
+  padding: 3px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.link {
+  font-size: 20px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+.link:hover {
+  color: rgb(255, 255, 255);
+}
+
+.item {
+  font-size: 20px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+.item:hover {
+  color: #d82863;
+}
+
+.latest_exchange {
+  border-radius:10px;
+  margin: 10px;
+  background-color: palevioletred;
+}
+
+.historics {
+  display: grid;
+  grid-auto-flow: row;
+  grid-column-gap: 100px;
+}
+
+.latest_exchange:hover {
+  background-color: #d82863;
+}
+
+.container {
+  justify-content: center;
+  text-align: center;
+  display: grid;
+  grid-auto-flow: row;
+  grid-column-gap: 10px;
+}
