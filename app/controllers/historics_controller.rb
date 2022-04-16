@@ -3,8 +3,11 @@ class HistoricsController < ApplicationController
 
   def index
     @historics = Historic.all
+  end
 
-    render json: @historics
+  def show
+    @historic = Historic.find(params[:id])
+    
   end
 
   def create
@@ -20,6 +23,6 @@ class HistoricsController < ApplicationController
   private 
 
   def api_params
-    params.permit(:success, :timestamp, :historical, :base, :date, rates: %i[USD])
+    params.permit(:id, :success, :timestamp, :historical, :base, :date, rates: %i[USD])
   end
 end

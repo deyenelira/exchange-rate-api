@@ -15,7 +15,7 @@ class ExchangeRateController < ApplicationController
 
   def respond
     if @response
-      render json: @response, status: 200
+      render json: @response[:data], status: 200
     else
       render json: { error: 'Invalid Host' }, status: :bad_request
     end
