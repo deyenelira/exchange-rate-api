@@ -13,7 +13,7 @@ class HistoricalRates
     if check_params
       { data: query }
     else
-      { data: { error: 'invalid date' } }
+      false
     end
   end
 

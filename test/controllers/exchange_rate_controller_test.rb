@@ -10,4 +10,9 @@ class ExchangeRateControllerTest < ActionDispatch::IntegrationTest
     get '/exchange_rate/historical_rates', params: { start_date: '2022-04-10', end_date: '2022-04-12' }
     assert_response :success
   end
+
+  test "should get the historical_rates" do
+    get '/exchange_rate/historical_rates', params: { start_date: '', end_date: '' }
+    assert_response :error
+  end
 end
