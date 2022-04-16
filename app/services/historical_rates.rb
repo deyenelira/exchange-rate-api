@@ -10,17 +10,23 @@ class HistoricalRates
   end
 
   def call
-    if check_params
+    if date_is_valid && check_params
       { data: query }
     else
       false
     end
   end
 
+  def date_is_valid
+    Date.parse(@start_date)
+    Date.parse(@end_date)
+    true
+  rescue ArgumentError
+    false
+  end
+
   def check_params
-    if @end_date.eql?('') || @start_date.eql?('')
-      return false
-    elsif @end_date.to_date < @start_date.to_date 
+    if @end_date.to_date < @start_date.to_date 
       return false
     elsif @start_date > DateTime.now || @end_date > DateTime.now 
       return false
