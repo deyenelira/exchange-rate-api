@@ -10,14 +10,28 @@ class HistoricalRates
   end
 
   def call
-    result = { data: query }
-    result
+    if check_params
+      { data: query }
+    else
+      { data: { error: 'invalid date' } }
+    end
+  end
+
+  def check_params
+    if @end_date.eql?('') || @start_date.eql?('')
+      return false
+    elsif @end_date.to_date < @start_date.to_date 
+      return false
+    elsif @start_date > DateTime.now || @end_date > DateTime.now 
+      return false
+    end
+    true
   end
 
   def query
     result = []
     dates = date_range(@start_date.to_date, @end_date.to_date, 1.day)
-    
+
     dates.each do |date|
       url = URI("https://fixer-fixer-currency-v1.p.rapidapi.com/#{date.to_date}?base=BRL&symbols=USD")
 
@@ -40,14 +54,14 @@ class HistoricalRates
   end
 
   def date_range(start, stop, step)
-    start = start.to_date 
+    start = start.to_date
     stop = stop.to_date
     dates = [start]
     result = [start.to_s]
-    while dates.last < (stop - step)
-      dates << (dates.last + step)
+    while dates.last <= (stop - step)
       result << (dates.last + step).to_s
-    end 
+      dates << (dates.last + step)
+    end
     result
   end
 end
