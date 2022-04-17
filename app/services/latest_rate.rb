@@ -8,8 +8,7 @@ class LatestRate
   end
 
   def call
-    result = { data: query }
-    result
+    { data: query }
   end
 
   def query
@@ -22,7 +21,6 @@ class LatestRate
     request = Net::HTTP::Get.new(url)
     request['X-RapidAPI-Host'] = 'fixer-fixer-currency-v1.p.rapidapi.com'
     request['X-RapidAPI-Key'] = '8829aa2d6amsh168397e64463c2fp1cdb0djsne545e1442df1'
-
 
     response = http.request(request)
     CreateHistoric.new(JSON.parse(response.read_body)).call

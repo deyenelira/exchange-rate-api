@@ -7,7 +7,6 @@ class HistoricsController < ApplicationController
 
   def show
     @historic = Historic.find(params[:id])
-    
   end
 
   def create

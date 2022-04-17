@@ -10,28 +10,13 @@ class HistoricalRates
   end
 
   def call
-    if date_is_valid && check_params
-      { data: query }
-    else
-      false
-    end
-  end
+    return data if date_is_valid && check_params
 
-  def date_is_valid
-    Date.parse(@start_date)
-    Date.parse(@end_date)
-    true
-  rescue ArgumentError
     false
   end
 
-  def check_params
-    if @end_date.to_date < @start_date.to_date 
-      return false
-    elsif @start_date > DateTime.now || @end_date > DateTime.now 
-      return false
-    end
-    true
+  def data
+    { data: query }
   end
 
   def query
@@ -50,7 +35,6 @@ class HistoricalRates
       request['X-RapidAPI-Key'] = '8829aa2d6amsh168397e64463c2fp1cdb0djsne545e1442df1'
 
       response = http.request(request)
-      p JSON.parse(response.read_body)
       CreateHistoric.new(JSON.parse(response.read_body)).call
 
       result << JSON.parse(response.read_body)
@@ -68,6 +52,23 @@ class HistoricalRates
       result << (dates.last + step).to_s
       dates << (dates.last + step)
     end
+
     result
+  end
+
+  def date_is_valid
+    Date.parse(@start_date)
+    Date.parse(@end_date)
+
+    true
+  rescue ArgumentError
+    false
+  end
+
+  def check_params
+    return false if @end_date.to_date < @start_date.to_date
+    return false if @start_date > DateTime.now || @end_date > DateTime.now
+
+    true
   end
 end
