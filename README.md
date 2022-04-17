@@ -1,25 +1,11 @@
 # README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# neurotech
+* Versão do ruby: 2.7.4
+* Dependências: Ruby, PostgreSQL
+* Instruções para rodar o projeto: 
+  - bundle install - instala todas as gems do projeto
+  - rake db:create -  cria o banco de dados
+  - rails s - executa a aplicaço no localhost:3000
+* Comandos para executar os testes:
+  - rspec ./spec/controllers/exchange_rate_spec.rb
+  - rspec ./spec/controllers/historics_spec.rb
+  - rspec ./spec/models/historic_spec.rb
